@@ -7,7 +7,7 @@ using RestMusic.Domain.Models;
 
 namespace RestMusic.Domain.Repositories
 {
-   public class MusicRepoList
+    public class MusicRepoList
     {
         private List<MusicRecord> _musicRecords = new List<MusicRecord>();
         private int _nextId = 1;
@@ -22,13 +22,13 @@ namespace RestMusic.Domain.Repositories
             }
         }
 
-           public IEnumerable<MusicRecord> GetAll()
-            {
-                return _musicRecords;
-            }
+        public IEnumerable<MusicRecord> GetAll()
+        {
+            return _musicRecords;
+        }
         public MusicRecord Add(MusicRecord record)
         {
-           if(record == null)
+            if (record == null)
             {
                 throw new ArgumentNullException(nameof(record));
             }
@@ -37,5 +37,14 @@ namespace RestMusic.Domain.Repositories
             return record;
         }
 
+        public IEnumerable<MusicRecord> GetByTitleOgArtist(string? title, string? artist)
+        {
+            return _musicRecords.Where(r =>
+                (string.IsNullOrEmpty(title) || r.Title.Contains(title, StringComparison.OrdinalIgnoreCase)) &&
+                (string.IsNullOrEmpty(artist) || r.Artist.Contains(artist, StringComparison.OrdinalIgnoreCase))
+            );
+
+
+        }
     }
 }

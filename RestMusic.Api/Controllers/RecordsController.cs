@@ -20,5 +20,14 @@ namespace RestMusic.Api.Controllers
         {
             return Ok(_repo.GetAll());
         }
+
+        [HttpGet]
+        [Route("search")]
+
+        public ActionResult Search([FromQuery] string? title, [FromQuery] string? artist)
+        {
+            var results = _repo.GetByTitleOgArtist(title, artist);
+            return Ok(results);
+        }
     }
 }
