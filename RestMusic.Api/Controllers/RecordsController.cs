@@ -14,11 +14,12 @@ namespace RestMusic.Api.Controllers
         {
             _repo = repo;
         }
-        //GET records
+        //GET methods
         [HttpGet]
-        public ActionResult GetAll()
+        public ActionResult Get([FromQuery] string? title, [FromQuery] string? artist)
         {
-            return Ok(_repo.GetAll());
+            var results = _repo.GetByTitleOgArtist(title, artist);
+            return Ok(results);
         }
     }
 }
