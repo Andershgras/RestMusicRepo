@@ -11,7 +11,7 @@ namespace RestMusic.Domain.Repositories
     {
         private List<MusicRecord> _musicRecords = new List<MusicRecord>();
         private int _nextId = 1;
-        public MusicRecordList(bool includeData = false)
+        public MusicRepoList(bool includeData = false)
 
         {
             if (includeData)
