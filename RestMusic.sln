@@ -7,6 +7,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RestMusic.Api", "RestMusic.
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RestMusic.Domain", "RestMusic.Domain\RestMusic.Domain.csproj", "{07B7E33D-CC35-4527-BE09-A2E4555FED55}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RestMusic.Test", "RestMusic.Test\RestMusic.Test.csproj", "{7F3BC58A-8C6E-40AF-81E2-545C1C5C59FC}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +23,10 @@ Global
 		{07B7E33D-CC35-4527-BE09-A2E4555FED55}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{07B7E33D-CC35-4527-BE09-A2E4555FED55}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{07B7E33D-CC35-4527-BE09-A2E4555FED55}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7F3BC58A-8C6E-40AF-81E2-545C1C5C59FC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7F3BC58A-8C6E-40AF-81E2-545C1C5C59FC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7F3BC58A-8C6E-40AF-81E2-545C1C5C59FC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7F3BC58A-8C6E-40AF-81E2-545C1C5C59FC}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
