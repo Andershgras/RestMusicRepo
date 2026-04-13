@@ -14,4 +14,8 @@
     <Folder Include="NewFolder\" />
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\RestMusic.Domain\RestMusic.Domain.csproj" />
+  </ItemGroup>
+
 </Project>
