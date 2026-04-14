@@ -1,6 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using RestMusic.Domain.Repositories;
-// For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
 namespace RestMusic.Api.Controllers
 {
@@ -9,16 +8,28 @@ namespace RestMusic.Api.Controllers
     public class RecordsController : ControllerBase
     {
         private readonly MusicRepoList _repo;
-        //Constructor
+
         public RecordsController(MusicRepoList repo)
         {
             _repo = repo;
         }
-        //GET records
+
         [HttpGet]
-        public ActionResult GetAll()
+        public ActionResult GetAll([FromQuery] string? title, [FromQuery] string? artist)
         {
-            return Ok(_repo.GetAll());
+            var records = _repo.GetAll();
+
+            if (!string.IsNullOrWhiteSpace(title))
+            {
+                records = records.Where(r => r.Title.Contains(title, StringComparison.OrdinalIgnoreCase));
+            }
+
+            if (!string.IsNullOrWhiteSpace(artist))
+            {
+                records = records.Where(r => r.Artist.Contains(artist, StringComparison.OrdinalIgnoreCase));
+            }
+
+            return Ok(records);
         }
     }
 }
