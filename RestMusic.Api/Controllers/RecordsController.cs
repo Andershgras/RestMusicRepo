@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using RestMusic.Domain.Repositories;
 
 namespace RestMusic.Api.Controllers
@@ -15,6 +16,7 @@ namespace RestMusic.Api.Controllers
         }
         //GET records
         [HttpGet]
+        [Authorize]
         public ActionResult GetAll([FromQuery] string? title, [FromQuery] string? artist)
         {
             var records = _repo.GetAll();
