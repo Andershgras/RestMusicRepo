@@ -38,5 +38,6 @@ namespace RestMusic.Test
             Assert.AreEqual(1, repo.GetAll().Count());
             Assert.AreSame(added, repo.GetAll().First());
         }
+        //Filtrering og sortering
     }
 }
