@@ -43,8 +43,6 @@ namespace RestMusic.Domain.Repositories
                 (string.IsNullOrEmpty(title) || r.Title.Contains(title, StringComparison.OrdinalIgnoreCase)) &&
                 (string.IsNullOrEmpty(artist) || r.Artist.Contains(artist, StringComparison.OrdinalIgnoreCase))
             );
-
-
         }
     }
 }
