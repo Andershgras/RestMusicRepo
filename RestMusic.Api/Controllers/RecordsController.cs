@@ -16,7 +16,8 @@ namespace RestMusic.Api.Controllers
         }
         //GET records
         [HttpGet]
-        [Authorize]
+        // [Authorize]
+        [AllowAnonymous]
         public ActionResult GetAll([FromQuery] string? title, [FromQuery] string? artist)
         {
             var records = _repo.GetAll();
