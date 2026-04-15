@@ -13,11 +13,11 @@ namespace RestMusic.Domain.Models
         public string Artist { get; set; }= string.Empty;
         public int DurationInSeconds { get; set; } = 0;
 
-        public int publicationYear { get; set; } = 0;
+        public int PublicationYear { get; set; } = 0;
 
         public override string ToString()
         {
-            return $"Id: {Id}, Title: {Title}, Artist: {Artist}, Duration: {DurationInSeconds} seconds, Publication Year: {publicationYear}";
+            return $"Id: {Id}, Title: {Title}, Artist: {Artist}, Duration: {DurationInSeconds} seconds, Publication Year: {PublicationYear}";
         }
     }
 }
