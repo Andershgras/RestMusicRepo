@@ -67,5 +67,17 @@ namespace RestMusic.Api.Controllers
             { return NotFound("No such record, id: " + id); }
             return Ok(removedRecord);
         }
+
+        // PUT api/<CatsController>/5
+        [HttpPut("{id}")]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
+        //[Authorize(Roles = "Admin")]
+        public ActionResult<MusicRecord> Put(int id, [FromBody] MusicRecord value)
+        {
+            MusicRecord? updatedRecord = _repo.Update(id, value);
+            if (updatedRecord == null) { return NotFound("No such member, id: " + id); }
+            return Ok(updatedRecord);
+        }
     }
 }
