@@ -59,5 +59,42 @@ namespace RestMusic.Test
 
             Assert.AreEqual(3, all.Count, "Null title and artist should return all seeded records.");
         }
+
+        [TestMethod]
+        public void GetById_ReturnsCorrectRecord()
+        {
+            // Arrange
+            var repo = new MusicRepoList(includeData: true);
+            var existing = repo.GetAll().First();
+            // Action
+            var found = repo.GetById(existing.Id);
+            // Assert
+            Assert.IsNotNull(found, "Should find record by ID.");
+            Assert.AreEqual(existing.Id, found.Id);
+            Assert.AreEqual(existing.Title, found.Title);
+            Assert.AreEqual(existing.Artist, found.Artist);
+        }
+        [TestMethod]
+        public void GetById_NonExisting()
+        {
+            // Arrange
+            var repo = new MusicRepoList(includeData: true);
+            // Action
+            var found = repo.GetById(999);
+            // Assert
+            Assert.IsNull(found, "Should return null for non-existing ID.");
+        }
+        [TestMethod]
+        public void GetById_InvalidId()
+        {
+            //Arange
+            var repo = new MusicRepoList(includeData: true);
+            //Action
+            var found = repo.GetById(-1);
+            var foundZero = repo.GetById(0);
+            //Assert
+            Assert.IsNull(found, "Should return null for negative ID.");
+            Assert.IsNull(foundZero, "Should return null for zero ID.");
+        }
     }
 }
