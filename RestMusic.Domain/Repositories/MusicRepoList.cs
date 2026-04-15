@@ -61,5 +61,19 @@ namespace RestMusic.Domain.Repositories
             }
             return null;
         }
+
+        public MusicRecord? Update(int id, MusicRecord updatedRecord)
+        {
+            var existingRecord = GetById(id);
+            if (existingRecord != null)
+            {
+                existingRecord.Title = updatedRecord.Title;
+                existingRecord.Artist = updatedRecord.Artist;
+                existingRecord.DurationInSeconds = updatedRecord.DurationInSeconds;
+                existingRecord.PublicationYear = updatedRecord.PublicationYear;
+                return existingRecord;
+            }
+            return null;
+        }
     }
 }

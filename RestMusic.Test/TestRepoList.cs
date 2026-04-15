@@ -141,5 +141,48 @@ namespace RestMusic.Test
             Assert.IsNotNull(firstDelete, "First delete should succeed.");
             Assert.IsNull(secondDelete, "Second delete should return null.");
         }
+        [TestMethod]
+        public void Update_Should_Return_Null_When_Id_Not_Exists()
+        {
+            // Arrange
+            var repo = new MusicRepoList(true);
+
+            var updated = new MusicRecord
+            {
+                Title = "Test",
+                Artist = "Test",
+                DurationInSeconds = 100,
+                PublicationYear = 2000
+            };
+
+            // Act
+            var result = repo.Update(999, updated);
+
+            // Assert
+            Assert.IsNull(result, "Should return null for non-existing ID.");
+        }
+        [TestMethod]
+        public void Updating_Should_Update_Existing_Record()
+        {
+            // Arrange
+            var repo = new MusicRepoList(true);
+            var existing = repo.GetAll().First();
+            var updated = new MusicRecord
+            {
+                Title = "Updated Title",
+                Artist = "Updated Artist",
+                DurationInSeconds = 200,
+                PublicationYear = 2020
+            };
+            // Act
+            var result = repo.Update(existing.Id, updated);
+            // Assert
+            Assert.IsNotNull(result, "Should return the updated record.");
+            Assert.AreEqual(existing.Id, result.Id, "ID should remain unchanged.");
+            Assert.AreEqual(updated.Title, result.Title);
+            Assert.AreEqual(updated.Artist, result.Artist);
+            Assert.AreEqual(updated.DurationInSeconds, result.DurationInSeconds);
+            Assert.AreEqual(updated.PublicationYear, result.PublicationYear);
+        }
     }
 }
