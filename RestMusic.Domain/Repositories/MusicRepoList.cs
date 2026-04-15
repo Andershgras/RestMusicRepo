@@ -16,9 +16,9 @@ namespace RestMusic.Domain.Repositories
         {
             if (includeData)
             {
-                Add(new MusicRecord { Id = _nextId++, Title = "Bohemian Rhapsody", Artist = "Queen", DurationInSeconds = 354, publicationYear = 1975 });
-                Add(new MusicRecord { Id = _nextId++, Title = "Imagine", Artist = "John Lennon", DurationInSeconds = 183, publicationYear = 1971 });
-                Add(new MusicRecord { Id = _nextId++, Title = "Stairway to Heaven", Artist = "Led Zeppelin", DurationInSeconds = 482, publicationYear = 1971 });
+                Add(new MusicRecord { Title = "Bohemian Rhapsody", Artist = "Queen", DurationInSeconds = 354, publicationYear = 1975 });
+                Add(new MusicRecord { Title = "Imagine", Artist = "John Lennon", DurationInSeconds = 183, publicationYear = 1971 });
+                Add(new MusicRecord { Title = "Stairway to Heaven", Artist = "Led Zeppelin", DurationInSeconds = 482, publicationYear = 1971 });
             }
         }
 
