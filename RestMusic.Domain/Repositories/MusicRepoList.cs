@@ -7,7 +7,7 @@ using RestMusic.Domain.Models;
 
 namespace RestMusic.Domain.Repositories
 {
-    public class MusicRepoList
+    public class MusicRepoList : IMusicRepoList
     {
         private List<MusicRecord> _musicRecords = new List<MusicRecord>();
         private int _nextId = 1;
