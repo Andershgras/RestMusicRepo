@@ -50,5 +50,16 @@ namespace RestMusic.Domain.Repositories
             return _musicRecords.FirstOrDefault(r => r.Id == id);
 
         }
+
+        public MusicRecord? Delete(int id)
+        {
+            var record = GetById(id);
+            if (record != null)
+            {
+                _musicRecords.Remove(record);
+                return record;
+            }
+            return null;
+        }
     }
 }

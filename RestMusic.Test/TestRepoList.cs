@@ -96,5 +96,50 @@ namespace RestMusic.Test
             Assert.IsNull(found, "Should return null for negative ID.");
             Assert.IsNull(foundZero, "Should return null for zero ID.");
         }
+
+        [TestMethod]
+        public void Delete_ExistingId_RemovesAndReturnsRecord()
+        {
+            // Arrange
+            var repo = new MusicRepoList(includeData: true);
+            var existing = repo.GetAll().First();
+
+            // Act
+            var deleted = repo.Delete(existing.Id);
+
+            // Assert
+            Assert.IsNotNull(deleted, "Should return deleted record.");
+            Assert.AreEqual(existing.Id, deleted.Id);
+            Assert.IsNull(repo.GetById(existing.Id), "Record should no longer exist after deletion.");
+        }
+
+        [TestMethod]
+        public void Delete_NonExistingId_ReturnsNull()
+        {
+            // Arrange
+            var repo = new MusicRepoList(includeData: true);
+            int nonExistingId = 999;
+
+            // Act
+            var deleted = repo.Delete(nonExistingId);
+
+            // Assert
+            Assert.IsNull(deleted, "Should return null for non-existing ID.");
+        }
+        [TestMethod]
+        public void Delete_Twice_ReturnsNullSecondTime()
+        {
+            // Arrange
+            var repo = new MusicRepoList(includeData: true);
+            var existing = repo.GetAll().First();
+
+            // Act
+            var firstDelete = repo.Delete(existing.Id);
+            var secondDelete = repo.Delete(existing.Id);
+
+            // Assert
+            Assert.IsNotNull(firstDelete, "First delete should succeed.");
+            Assert.IsNull(secondDelete, "Second delete should return null.");
+        }
     }
 }

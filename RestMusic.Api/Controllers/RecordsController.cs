@@ -55,5 +55,17 @@ namespace RestMusic.Api.Controllers
             string uri = Url.RouteUrl(RouteData.Values) + "/" + theRecord.Id;
             return Created(uri, theRecord);
         }
+        // DELETE api/<CatsController>/5
+        [HttpDelete("{id}")]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
+        //[Authorize(Roles = "Admin")]
+        public ActionResult<MusicRecord> Delete(int id)
+        {
+            MusicRecord? removedRecord = _repo.Delete(id);
+            if (removedRecord == null) 
+            { return NotFound("No such record, id: " + id); }
+            return Ok(removedRecord);
+        }
     }
 }
