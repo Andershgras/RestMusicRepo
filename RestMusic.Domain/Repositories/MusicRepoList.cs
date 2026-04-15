@@ -44,5 +44,11 @@ namespace RestMusic.Domain.Repositories
                 (string.IsNullOrEmpty(artist) || r.Artist.Contains(artist, StringComparison.OrdinalIgnoreCase))
             );
         }
+
+        public MusicRecord? GetById(int id)
+        {
+            return _musicRecords.FirstOrDefault(r => r.Id == id);
+
+        }
     }
 }
