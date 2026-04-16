@@ -32,10 +32,19 @@ namespace RestMusic.Domain.Repositories
         }
         public IEnumerable<MusicRecord> GetByTitleOgArtist(string? title, string? artist)
         {
-            return _context.MusicRecords.Where(r =>
-                (string.IsNullOrEmpty(title) || r.Title.Contains(title, StringComparison.OrdinalIgnoreCase)) &&
-                (string.IsNullOrEmpty(artist) || r.Artist.Contains(artist, StringComparison.OrdinalIgnoreCase))
-            ).ToList();
+            IQueryable<MusicRecord> query = _context.MusicRecords;
+
+            if (!string.IsNullOrWhiteSpace(title))
+            {
+                query = query.Where(r => r.Title != null && r.Title.Contains(title));
+            }
+
+            if (!string.IsNullOrWhiteSpace(artist))
+            {
+                query = query.Where(r => r.Artist != null && r.Artist.Contains(artist));
+            }
+
+            return query.ToList();
         }
         public MusicRecord? GetById(int id)
         {
@@ -56,7 +65,7 @@ namespace RestMusic.Domain.Repositories
         {
             var existingRecord = GetById(id);
             if (existingRecord != null)
-            {
+            {   
                 existingRecord.Title = updatedRecord.Title;
                 existingRecord.Artist = updatedRecord.Artist;
                 existingRecord.DurationInSeconds = updatedRecord.DurationInSeconds;
