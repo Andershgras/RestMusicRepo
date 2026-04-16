@@ -11,7 +11,6 @@ using System.Text;
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
-builder.Services.AddSingleton<MusicRepoList>(_ => new MusicRepoList(includeData: true));
 builder.Services.AddControllers();
 builder.Services.AddOpenApi();
 
@@ -27,6 +26,7 @@ builder.Services.AddCors(options =>
 });
 
 var storageType = builder.Configuration["StorageType"];
+
 if (storageType == "Db")
 {
     builder.Services.AddDbContext<MusicRecordDbContext>(options =>
@@ -39,7 +39,6 @@ else
     builder.Services.AddSingleton<IMusicRepoList>(
         new MusicRepoList(includeData: true));
 }
-
 
 // JWT settings
 var jwtSettings = builder.Configuration.GetSection("Jwt");
@@ -82,7 +81,7 @@ builder.Services.AddSwaggerGen(opt =>
         Scheme = "bearer",
         BearerFormat = "JWT",
         In = ParameterLocation.Header,
-        Description = "Enter your JWT token here. Example: Bearer eyJhbGciOiJIUzI1Ni..."
+        Description = "Enter your JWT token here. Example: eyJhbGciOiJIUzI1Ni..."
     });
 
     opt.AddSecurityRequirement(new OpenApiSecurityRequirement
