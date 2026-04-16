@@ -1,7 +1,11 @@
 using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.Extensions.DependencyInjection;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.AspNetCore.Builder;
+using RestMusic.Domain.Repositories;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
-using RestMusic.Domain.Repositories;
+using RestMusic.Domain.Models;
 using System.Text;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -21,6 +25,21 @@ builder.Services.AddCors(options =>
               .AllowAnyHeader();
     });
 });
+
+var storageType = builder.Configuration["StorageType"];
+if (storageType == "Db")
+{
+    builder.Services.AddDbContext<MusicRecordDbContext>(options =>
+        options.UseSqlServer(
+            builder.Configuration.GetConnectionString("DefaultConnection")));
+    builder.Services.AddScoped<IMusicRepoList, MusicRepoDb>();
+}
+else
+{
+    builder.Services.AddSingleton<IMusicRepoList>(
+        new MusicRepoList(includeData: true));
+}
+
 
 // JWT settings
 var jwtSettings = builder.Configuration.GetSection("Jwt");

@@ -12,7 +12,6 @@ namespace RestMusic.Domain.Models
         public string Title { get; set; }= string.Empty;
         public string Artist { get; set; }= string.Empty;
         public int DurationInSeconds { get; set; } = 0;
-
         public int PublicationYear { get; set; } = 0;
 
         public override string ToString()
