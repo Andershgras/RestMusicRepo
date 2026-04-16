@@ -9,8 +9,6 @@ namespace RestMusic.Domain.Models
 {
     public class MusicRecordDbContext : DbContext
     {
-        private readonly MusicRecordDbContext _context;
-
         public MusicRecordDbContext(DbContextOptions<MusicRecordDbContext> options) : base(options)
         {
         }
