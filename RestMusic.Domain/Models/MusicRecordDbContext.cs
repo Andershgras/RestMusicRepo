@@ -14,6 +14,6 @@ namespace RestMusic.Domain.Models
         public MusicRecordDbContext(DbContextOptions<MusicRecordDbContext> options) : base(options)
         {
         }
-        public DbSet<MusicRecord> Artists { get; set; } = null!;
+        public DbSet<MusicRecord> MusicRecords { get; set; }
     }
 }
