@@ -37,14 +37,22 @@ namespace RestMusic.Api.Controllers
 
             return Ok(record);
         }
-
         [HttpPost]
         [Authorize(Roles = "Admin")]
         [ProducesResponseType(StatusCodes.Status201Created)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status401Unauthorized)]
         [ProducesResponseType(StatusCodes.Status403Forbidden)]
         public ActionResult<MusicRecord> Post([FromBody] MusicRecord newRecord)
         {
+            newRecord.Title = newRecord.Title?.Trim() ?? string.Empty;
+            newRecord.Artist = newRecord.Artist?.Trim() ?? string.Empty;
+
+            if (!ModelState.IsValid)
+            {
+                return ValidationProblem(ModelState);
+            }
+
             MusicRecord theRecord = _repo.Add(newRecord);
             return CreatedAtAction(nameof(GetById), new { id = theRecord.Id }, theRecord);
         }
@@ -70,11 +78,20 @@ namespace RestMusic.Api.Controllers
         [HttpPut("{id}")]
         [Authorize(Roles = "Admin")]
         [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status401Unauthorized)]
         [ProducesResponseType(StatusCodes.Status403Forbidden)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         public ActionResult<MusicRecord> Put(int id, [FromBody] MusicRecord value)
         {
+            value.Title = value.Title?.Trim() ?? string.Empty;
+            value.Artist = value.Artist?.Trim() ?? string.Empty;
+
+            if (!ModelState.IsValid)
+            {
+                return ValidationProblem(ModelState);
+            }
+
             MusicRecord? updatedRecord = _repo.Update(id, value);
 
             if (updatedRecord == null)
