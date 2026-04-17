@@ -25,6 +25,7 @@ namespace RestMusic.Api.Controllers
         }
 
         [HttpGet("{id}")]
+        [AllowAnonymous]
         public ActionResult GetById(int id)
         {
             var record = _repo.GetById(id);
@@ -38,7 +39,10 @@ namespace RestMusic.Api.Controllers
         }
 
         [HttpPost]
+        [Authorize(Roles = "Admin")]
         [ProducesResponseType(StatusCodes.Status201Created)]
+        [ProducesResponseType(StatusCodes.Status401Unauthorized)]
+        [ProducesResponseType(StatusCodes.Status403Forbidden)]
         public ActionResult<MusicRecord> Post([FromBody] MusicRecord newRecord)
         {
             MusicRecord theRecord = _repo.Add(newRecord);
@@ -46,7 +50,10 @@ namespace RestMusic.Api.Controllers
         }
 
         [HttpDelete("{id}")]
+        [Authorize(Roles = "Admin")]
         [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status401Unauthorized)]
+        [ProducesResponseType(StatusCodes.Status403Forbidden)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         public ActionResult<MusicRecord> Delete(int id)
         {
@@ -61,7 +68,10 @@ namespace RestMusic.Api.Controllers
         }
 
         [HttpPut("{id}")]
+        [Authorize(Roles = "Admin")]
         [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status401Unauthorized)]
+        [ProducesResponseType(StatusCodes.Status403Forbidden)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         public ActionResult<MusicRecord> Put(int id, [FromBody] MusicRecord value)
         {
