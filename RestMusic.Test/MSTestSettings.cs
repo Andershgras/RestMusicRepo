@@ -1,1 +1,2 @@
-﻿[assembly: Parallelize(Scope = ExecutionScope.MethodLevel)]
+﻿//LEGACY
+//[assembly: Parallelize(Scope = ExecutionScope.MethodLevel)]
